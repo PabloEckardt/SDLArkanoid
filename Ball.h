@@ -28,5 +28,3 @@ public:
 std::ostream& operator<<(std::ostream&, const Ball&);
 
 }
-
-//    g++ -std=c++14 -o Ball Ball.cpp

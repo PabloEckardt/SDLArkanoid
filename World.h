@@ -22,7 +22,7 @@ public:
 	World(int32_t w, int32_t h, Ball b, Paddle p, std::vector<Brick> bs);
 
 
-	bool thingsCollide(std::vector<Brick> bricks,Paddle pad, Ball ball) const;
+	bool BricksOrPaddleCollide(std::vector<Brick> bricks,Paddle pad, Ball ball) const;
 
 	int32_t getWidth() const;
 	int32_t getHeight() const;
