@@ -86,8 +86,60 @@ bool World::BricksOrPaddleCollide(std::vector<Brick> bVect, Paddle pad, Ball bal
 			//bricks don't collide means false
 			return false;
 };
-bool World::BrickandBallCollide(std::vector<brick> bVect, Ball ball) const{
-	
+bool World::BrickandBallCollide(std::vector<Brick> bVect, Ball ball) const{
+	//this is the most process heavy function.
+	// it checks every single edge of a brick, and sees if the distance of every
+	// point to the center of the ball is less than the ball's radious
+	//in that case the ball should bounce and the brick should disappear.
+	//the outer most loop iterates over every brick, the next loop iterates
+	//for the height of the brick.
+	//if the the current y component of the brick is at the beginning or at the end
+	// iterate over the width of the block and test every single Point
+	// otherwise test the two lateral points of the hollow brick.
+	//this loop could assume the brick is full of points, but that is
+	// a lot more inefficient. Here the number of comparisons is not a squared number
+	//but width  + width + height + height. which is less than width X height
+
+	int ballrad = ball.rad;
+	for (size_t i = 0; i < bVect.size(); i++) {
+		Point ballCenter = ball.getCenter();
+		Point  brickTopLeft = bVect[i].getUpperLeft();
+
+		for (size_t i = 0; i < bVect[i].height+1; i++) {
+			// i+bVect[i].height  == brickTopLeft.y + bVect[i].height
+			if (i == 0 ){
+				for (size_t j = 0; j < bVect[i].width +1; j++ ) {
+					Point p;
+					p.x = brickTopLeft.x + j;
+					p.y = brickTopLeft.y;
+					if (ballrad <= distance(p,ball.getCenter()) ){
+						return true;
+					}
+				}
+			}
+			else if (i == bVect[i].height ){
+				for (size_t j = 0; j < bVect[i].width +1; j++) {
+					Point p;
+					p.x = brickTopLeft.x + j;
+					p.y = brickTopLeft.y + bVect[i].height;
+					if (ballrad <= distance(p,ball.getCenter()) ){
+						return true;
+					}
+				}
+			}
+			else{
+				Point p;
+				p.x = brickTopLeft.x;
+				p.y = brickTopLeft.y;
+				Point p2;
+				p2.x = brickTopLeft.x + brickTopLeft.x + bVect[i].width;
+				p2.y = brickTopLeft.y;
+				if(ballrad <= distance(p,ballCenter) || ballrad <= distance(p2,ballCenter)){
+					return true;
+				}
+			}
+		}
+	}
 }
 
 
