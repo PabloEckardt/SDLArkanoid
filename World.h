@@ -23,6 +23,8 @@ public:
 
 
 	bool BricksOrPaddleCollide(std::vector<Brick> bricks,Paddle pad, Ball ball) const;
+	bool BrickandBallCollide(std::vector<Brick> bVect, Ball ball) const;
+	bool BallPaddleCollide(Paddle paddle, Ball ball) const;
 
 	int32_t getWidth() const;
 	int32_t getHeight() const;

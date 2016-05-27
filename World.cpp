@@ -3,11 +3,7 @@
 #include <ostream>
 #include <iostream>
 
-// Ball WorldBall;
-// std::vector<Brick> WorldBricks;
-// int32_t w, h;
-// Paddle WorldPadle;
-//pabloeckardt 3am!
+
 using std::endl;
 namespace arkanoid{
 	World::World(int32_t w, int32_t h, Ball b, Paddle p, std::vector<Brick> bs):	WorldBall{b},WorldBricks{bs},w{w},h{h},WorldPadle{p}{};
@@ -45,6 +41,7 @@ namespace arkanoid{
 		double result =  sqrt(xsq+ysq);
 		return result;
 	}
+
 
 // bool circlecoll();
 //squaredcoll detects a collision between any two squares.
@@ -91,6 +88,8 @@ bool World::BrickandBallCollide(std::vector<Brick> bVect, Ball ball) const{
 	// it checks every single edge of a brick, and sees if the distance of every
 	// point to the center of the ball is less than the ball's radious
 	//in that case the ball should bounce and the brick should disappear.
+
+	//CODE:
 	//the outer most loop iterates over every brick, the next loop iterates
 	//for the height of the brick.
 	//if the the current y component of the brick is at the beginning or at the end
@@ -113,6 +112,7 @@ bool World::BrickandBallCollide(std::vector<Brick> bVect, Ball ball) const{
 					p.x = brickTopLeft.x + j;
 					p.y = brickTopLeft.y;
 					if (ballrad <= distance(p,ball.getCenter()) ){
+						bVect[i].life = 0;
 						return true;
 					}
 				}
@@ -123,6 +123,7 @@ bool World::BrickandBallCollide(std::vector<Brick> bVect, Ball ball) const{
 					p.x = brickTopLeft.x + j;
 					p.y = brickTopLeft.y + bVect[i].height;
 					if (ballrad <= distance(p,ball.getCenter()) ){
+						bVect[i].life = 0;
 						return true;
 					}
 				}
@@ -135,14 +136,39 @@ bool World::BrickandBallCollide(std::vector<Brick> bVect, Ball ball) const{
 				p2.x = brickTopLeft.x + brickTopLeft.x + bVect[i].width;
 				p2.y = brickTopLeft.y;
 				if(ballrad <= distance(p,ballCenter) || ballrad <= distance(p2,ballCenter)){
+					bVect[i].life = 0;
 					return true;
 				}
 			}
 		}
 	}
+	return false;
 }
 
+bool World::BallPaddleCollide(Paddle paddle, Ball ball) const{
+	return false;
+}
+void World::update(Input){
 
+	for (size_t i = 0; i < abs((WorldBall.getVelocity()).vx); i++) {
+		// update the position of the ball
+		(WorldBall.center).x++;
+		(WorldBall.center).y++;
+
+		//Update paddle given input
+
+		//if ball-brick collision
+		BrickandBallCollide(WorldBricks,WorldBall);
+		//if ball-paddle collision
+		if(BallPaddleCollide(WorldBricks,WorldBall)){
+
+		}
+		//if ball edge collision
+
+
+		}
+
+}
 std::ostream& operator<<(std::ostream& os, const std::vector<Brick>& bricks) {
 	os << "[ ";
 	for (auto const& b: bricks)
