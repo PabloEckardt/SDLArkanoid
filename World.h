@@ -14,33 +14,26 @@ namespace arkanoid
 class World
 {
 public:
-	// Implement the member functions listed below
-		Ball WorldBall;
-		std::vector<Brick> WorldBricks;
-		int32_t w, h;
-		Paddle WorldPadle;
+	// members
+	Ball WorldBall; // the game's ball
+	std::vector<Brick> WorldBricks; //all bricks will be contained and deleted from this vector.
+	int32_t w, h; // size of the board
+	Paddle WorldPadle; // the player's paddle
+
+	//constructor
 	World(int32_t w, int32_t h, Ball b, Paddle p, std::vector<Brick> bs);
 
-
-	bool BricksOrPaddleCollide(std::vector<Brick> bricks,Paddle pad, Ball ball) const;
-	bool BrickandBallCollide(std::vector<Brick> bVect, Ball ball) const;
-	bool BallPaddleCollide(Paddle paddle, Ball ball) const;
-
-	int32_t getWidth() const;
-	int32_t getHeight() const;
+	//member functions
+	int32_t getWorldWidth() const;
+	int32_t getWorldHeight() const;
 	Ball getBall() const;
 	Paddle getPaddle() const;
 	std::vector<Brick> getBricks() const;
-
 	bool isLegal() const;
 	void update(Input);
 };
 
 // The type of the exception that needs to be thrown when the game is over
 class GameOverException: std::exception {};
-
-// Additional logic to let std::cout work with World objects
-std::ostream& operator<<(std::ostream&, const std::vector<Brick>&);
-std::ostream& operator<<(std::ostream&, const World&);
 
 }
