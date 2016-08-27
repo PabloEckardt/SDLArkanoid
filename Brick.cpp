@@ -14,9 +14,5 @@ Point Brick::getLowerRight() const{
 	return lr;
 };
 
-std::ostream& operator<<(std::ostream& os, const Brick& brick) {
-	os << "Brick { " << brick.getUpperLeft() << ", " << brick.getLowerRight() << " }";
-	return os;
-}
 
 }

@@ -1,7 +1,5 @@
 #pragma once
-
 #include "Point.h"
-
 #include <iosfwd>
 
 namespace arkanoid
@@ -19,7 +17,5 @@ public:
 	Point getLowerRight() const;
 };
 
-// Additional logic to let std::cout work with Brick objects
-std::ostream& operator<<(std::ostream&, const Brick&);
 
 }
