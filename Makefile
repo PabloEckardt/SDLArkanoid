@@ -1,16 +1,12 @@
-CPPFLAGS=-std=c++14 -g -O0 -Wall -Wextra
+CC = g++ -std=c++14
 
-SRCS=main.cpp Point.cpp Ball.cpp Paddle.cpp Brick.cpp World.cpp
-OBJS=$(SRCS:.cpp=.o)
+OBJS = Paddle.cpp Brick.cpp Point.cpp Ball.cpp World.cpp main.cpp Ball.cpp
 
-all: arkanoid
+OBJ_NAME = main
 
-arkanoid: $(OBJS)
-	$(CXX) $^ -o $@
+LINKER_FLAGS = -lSDL2
 
-%.o: %.cpp %.h
-	$(CXX) $(CPPFLAGS) -c $<
+COMPILER_FLAGS = 
 
-clean:
-	rm -rf arkanoid
-	rm -rf $(OBJS)
+all: $(OBJS)
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) $ -o $(OBJ_NAME)
