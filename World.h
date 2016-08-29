@@ -17,20 +17,29 @@ public:
 	// members
 	Ball WorldBall; // the game's ball
 	std::vector<Brick> WorldBricks; //all bricks will be contained and deleted from this vector.
-	int32_t w, h; // size of the board
+	int32_t w = 720;
+	int32_t h = 480; // size of the board
 	Paddle WorldPadle; // the player's paddle
-
+	short gameLive = 1;// 1 while the game is running, 0 when its over.
 	//constructor
-	World(int32_t w, int32_t h, Ball b, Paddle p, std::vector<Brick> bs);
+	World( Ball b, Paddle p);
 
 	//member functions
+	//getters
 	int32_t getWorldWidth() const;
 	int32_t getWorldHeight() const;
 	Ball getBall() const;
 	Paddle getPaddle() const;
 	std::vector<Brick> getBricks() const;
-	bool isLegal() const;
-	void update(Input);
+
+	//detect collisions between bricks and bricks or bricks and paddles.
+	bool twoRectCollision(Point p1, int w1, int h1, Point p2, int w2, int h2)const;
+	//collisions between the ball and any rectangle.
+	bool circleRectCollision(Point rect, int widthRect, int heightRect, Ball ball)const;
+	// checks that nothing is overlapping, and everything is placed properly.
+	bool isValid() const;
+	// updates once per tick of the game.
+	void update();
 };
 
 // The type of the exception that needs to be thrown when the game is over
