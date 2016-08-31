@@ -3,12 +3,24 @@
 #include <ostream>
 #include <iostream>
 
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+
+//The surface contained by the window
+SDL_Surface* gScreenSurface = NULL;
+
+//The image we will load and show on the screen
+SDL_Surface* gOpening = NULL;
+
+//The window renderer
+SDL_Renderer* gRenderer = NULL;
 
 using std::endl;
-namespace arkanoid{
 
 	World::World( Ball b, Paddle p):	WorldBall{b},WorldPadle{p}{
-
+		gameLive = 1;
+		w = 720;
+		h = 480;
 		WorldBricks = { }; // make sure the vector of bricks is empty
 
 		for (size_t i = 1; i < 7; i++) // 6 rows of bricks.
@@ -177,4 +189,16 @@ namespace arkanoid{
 		}
 
 	}
-}
+	void World::drawWorld(){
+			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
+      for (size_t i = 0; i < WorldBricks.size(); i++) {
+              if ( WorldBricks.at(i).live ){
+								std::cout<<"drawme"<<std::endl;
+								// make filled rect object
+								SDL_Rect filledRect = {WorldBricks.at(i).leftup.x, WorldBricks.at(i).leftup.y, WorldBricks.at(i).width,WorldBricks.at(i).height};// make rectangle structure
+								SDL_SetRenderDrawColor(gRenderer,0x00,0x00,0x00,0xFF);
+	              SDL_RenderFillRect(gRenderer,&filledRect);
+								SDL_RenderPresent( gRenderer );
+              }
+      }
+	}

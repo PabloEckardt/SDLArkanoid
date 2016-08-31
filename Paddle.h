@@ -5,8 +5,7 @@
 
 #include <iosfwd>
 
-namespace arkanoid
-{
+
 
 class Paddle
 {
@@ -22,8 +21,3 @@ public:
 	Point getLowerRight() const;
 	int32_t getVelocity() const;
 };
-
-// Additional logic to let std::cout work with Paddle objects
-std::ostream& operator<<(std::ostream&, const Paddle&);
-
-}

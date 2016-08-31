@@ -1,25 +1,11 @@
 #include "World.h"
-
 #include <iostream>
-#include <SDL2/SDL.h>
 #include <cstdlib>
-
-using namespace arkanoid;
 
 const int SCREEN_WIDTH = 720;
 const int SCREEN_HEIGHT = 480;
 
 int main() {
-
-	/*
-	0,0--------------------
-	|	   	b r i c k s			|
-	|											|
-	|				ball				  |
-	|											|
-	---------paddle------720,480
-	*/
-
 	// SDL Rendering window.
 	SDL_Window * window = NULL;
 	SDL_Surface * screenSurface = NULL;
@@ -29,7 +15,7 @@ int main() {
 	 }
 	 else {
 		 //creating the window with the constant target values
-		 window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		 window = SDL_CreateWindow( "Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		 if( window == NULL ) {
 			  printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
 			}
@@ -44,15 +30,27 @@ int main() {
 				SDL_Delay(2000);
 			}
 	}
+	//
 	Ball ball = {{360, 240}, 5, {-1, 1}};
 	Paddle paddle = {{360, 459}, 20, 10, 1};
 	World world = { ball, paddle};
 
 	std::cout << "is valid = " << world.isValid() << std::endl;
+	SDL_Event e;
 	while (world.gameLive){
-		// world.update();
+			// world.update();
+			SDL_PollEvent( &e );
+		if (e.type == SDL_QUIT){
+			world.gameLive = 0;
+		}
+		if (e.type == SDL_KEYDOWN){
+			printf("pressed value %d", e.key.keysym.sym);
+		}
+		world.drawWorld();
 	}
-	// Uncomment the following lines after you finish World::update()
-	//world.update(Input::Left);
-	//std::cout << world << std::endl;
+	//Destroy window
+	SDL_DestroyWindow(window);
+	//qui SDL
+	SDL_Quit();
+	return 0;
 }

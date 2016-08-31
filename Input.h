@@ -2,8 +2,7 @@
 
 #include <cstdint>
 
-namespace arkanoid
-{
+
 
 // A enumeration representing user input
 enum class Input: uint8_t
@@ -12,5 +11,3 @@ enum class Input: uint8_t
 	Left,
 	Right
 };
-
-}

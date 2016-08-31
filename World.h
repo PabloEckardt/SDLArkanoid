@@ -4,12 +4,10 @@
 #include "Brick.h"
 #include "Input.h"
 #include "Paddle.h"
-
+#include <SDL2/SDL.h>
 #include <iosfwd>
 #include <vector>
 
-namespace arkanoid
-{
 
 class World
 {
@@ -17,10 +15,10 @@ public:
 	// members
 	Ball WorldBall; // the game's ball
 	std::vector<Brick> WorldBricks; //all bricks will be contained and deleted from this vector.
-	int32_t w = 720;
-	int32_t h = 480; // size of the board
+	int32_t w;
+	int32_t h; // size of the board
 	Paddle WorldPadle; // the player's paddle
-	short gameLive = 1;// 1 while the game is running, 0 when its over.
+	short gameLive;// 1 while the game is running, 0 when its over.
 	//constructor
 	World( Ball b, Paddle p);
 
@@ -40,9 +38,6 @@ public:
 	bool isValid() const;
 	// updates once per tick of the game.
 	void update();
+	//draw the elements
+	void drawWorld();
 };
-
-// The type of the exception that needs to be thrown when the game is over
-class GameOverException: std::exception {};
-
-}

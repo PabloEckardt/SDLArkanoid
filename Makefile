@@ -1,6 +1,6 @@
 CC = g++ -std=c++14
 
-OBJS = Paddle.cpp Brick.cpp Point.cpp Ball.cpp World.cpp main.cpp Ball.cpp
+OBJS = Paddle.cpp Brick.cpp Point.cpp Ball.cpp World.cpp main.cpp
 
 OBJ_NAME = main
 

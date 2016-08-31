@@ -3,8 +3,7 @@
 #include <cstdint>
 #include <iosfwd>
 
-namespace arkanoid
-{
+
 
 struct Point
 {
@@ -16,9 +15,5 @@ struct Velocity
 	int32_t vx, vy;
 };
 
-std::ostream& operator<<(std::ostream&, Point);
-std::ostream& operator<<(std::ostream&, Velocity);
 
 Point updatePoint(Point, Velocity);
-
-}
