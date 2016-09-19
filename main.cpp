@@ -4,6 +4,17 @@
 
 const int SCREEN_WIDTH = 720;
 const int SCREEN_HEIGHT = 480;
+//The window we'll be rendering to
+SDL_Window* gWindow = NULL;
+
+//The surface contained by the window
+SDL_Surface* gScreenSurface = NULL;
+
+//The image we will load and show on the screen
+SDL_Surface* gOpening = NULL;
+
+//The window renderer
+SDL_Renderer* gRenderer = NULL;
 
 int main() {
 	// SDL Rendering window.
@@ -14,6 +25,8 @@ int main() {
 		 printf( "SDL could not initialize SDL_Error: %s\n", SDL_GetError() );
 	 }
 	 else {
+		 gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
+
 		 //creating the window with the constant target values
 		 window = SDL_CreateWindow( "Arkanoid", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		 if( window == NULL ) {
@@ -38,7 +51,7 @@ int main() {
 	std::cout << "is valid = " << world.isValid() << std::endl;
 	SDL_Event e;
 	while (world.gameLive){
-			// world.update();
+			world.update();
 			SDL_PollEvent( &e );
 		if (e.type == SDL_QUIT){
 			world.gameLive = 0;
@@ -46,7 +59,6 @@ int main() {
 		if (e.type == SDL_KEYDOWN){
 			printf("pressed value %d", e.key.keysym.sym);
 		}
-		world.drawWorld();
 	}
 	//Destroy window
 	SDL_DestroyWindow(window);

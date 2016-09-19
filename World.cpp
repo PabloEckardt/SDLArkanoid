@@ -190,15 +190,15 @@ using std::endl;
 
 	}
 	void World::drawWorld(){
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
-      for (size_t i = 0; i < WorldBricks.size(); i++) {
-              if ( WorldBricks.at(i).live ){
-								std::cout<<"drawme"<<std::endl;
-								// make filled rect object
-								SDL_Rect filledRect = {WorldBricks.at(i).leftup.x, WorldBricks.at(i).leftup.y, WorldBricks.at(i).width,WorldBricks.at(i).height};// make rectangle structure
-								SDL_SetRenderDrawColor(gRenderer,0x00,0x00,0x00,0xFF);
-	              SDL_RenderFillRect(gRenderer,&filledRect);
-								SDL_RenderPresent( gRenderer );
+    gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
+    
+    for (size_t i = 0; i < WorldBricks.size(); i++) {
+            if ( WorldBricks.at(i).live ){
+				// make filled rect object
+			    SDL_Rect filledRect = {WorldBricks.at(i).leftup.x, WorldBricks.at(i).leftup.y, WorldBricks.at(i).width,WorldBricks.at(i).height};// make rectangle structure
+				SDL_SetRenderDrawColor(gRenderer,0x00,0x00,0x00,0xFF);
+	            SDL_RenderFillRect(gRenderer,&filledRect);
+				SDL_RenderPresent( gRenderer );
               }
       }
 	}
