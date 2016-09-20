@@ -8,9 +8,9 @@ Game status: Incomplete
 
 - [x] Define class structures.
 - [x] Implement game logic correctness-checking functions.
-- [x] implement game cycles (ticks).
+- [x] Implement game cycles (ticks).
 - [x] Stablish end of game state.
 - [ ] Fix SDL bug. :(
 - [ ] Add a scoreboard display.
-- [ ] reset game function.
+- [ ] Reset game function.
 - [ ] Implement hardware accelaration.
